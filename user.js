@@ -10,13 +10,13 @@ const getFromLoacl = () => {
     if (payArr != null) {
         for (let i = 0; i < payArr.length; i++) {
             if (payArr[i].userPayed == username) {
-                displayArea.innerHTML=`
+                displayArea.innerHTML += `
                 <div class="card">
                     <div class="contentBx">
                     <h2>order id: ${payArr[i].orderId}</h2>
                     <h2>Total Price: ${payArr[i].totalPrice}$</h2>
                     </div>
-                </div> `
+                </div> `;
             }
         }
     }
