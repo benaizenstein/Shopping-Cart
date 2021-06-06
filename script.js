@@ -134,17 +134,22 @@ let productsArray = [
         type: "woman",
     },
 ];
-
+let userLogin = false;
+let userOnline = " ";
 let paymentsArray = [];
+let usersArray = [];
 let displayArea = document.querySelector(".container");
 let displaySize = document.querySelector(".display");
 let leftNavBar = document.querySelector(".left-navbar");
 let payment = document.querySelector(".payment");
 let paymentLines = document.querySelector(".payment_lines");
+let popup = document.querySelector(".popup");
+let loginWrap = document.querySelector(".login-wrap");
 let curPage = "all";
 let firstRunFav = true;
 let firstRunCart = true;
 let totalPriceForCheck = 0;
+let toggleswitcher = 0;
 const cleanDisplayArea = () => (displayArea.innerHTML = " ");
 const setIdForAllProducts = () => {
     for (let i = 0; i < 12; i++) {
@@ -233,6 +238,11 @@ const display = (userChoosepage, inputValue) => {
         displaySize.style.width = "80vw";
         displaySize.style.right = "0";
         displayFav();
+    } else if (curPage == "user") {
+        payment.style.visibility = "hidden";
+        displaySize.style.width = "80vw";
+        displaySize.style.right = "0";
+        displayUser();
     } else if (curPage == "cart") {
         displayCart();
     } else if (curPage == "search") {
@@ -373,7 +383,7 @@ const displayAll = () => {
 const displayMan = () => {
     for (let i = 0; i < productsArray.length; i++) {
         if (productsArray[i].type == "man") {
-            console.log(productsArray[i].type)
+            console.log(productsArray[i].type);
             if (productsArray[i].cart) {
                 displayArea.innerHTML += cardPriceDisplayStr(i);
             } else {
@@ -398,7 +408,30 @@ const displayWoman = () => {
         }
     }
 };
+//-----------------------------------Display User---------------------------------//
 
+const togglePopup = () => {
+    if (toggleswitcher == 0) {
+        popup.style.opacity = 1;
+        loginWrap.style.opacity = 1;
+        popup.style.zIndex = "10";
+        loginWrap.style.zIndex = "11";
+        toggleswitcher = 1;
+    } else {
+        popup.style.opacity = 0;
+        loginWrap.style.opacity = 1;
+        popup.style.zIndex = "-1";
+        loginWrap.style.zIndex = "-1";
+        toggleswitcher = 0;
+    }
+};
+const displayUser = () => {
+    if (userLogin != false) {
+        alert(`Hello ${userOnline}`);
+    } else {
+        togglePopup();
+    }
+};
 //-----------------------------------Display FAV---------------------------------//
 
 const displayFav = () => {
@@ -606,6 +639,113 @@ const confirmOrder = () => {
         totalPrice: totalPrice,
         orderId: rndNum,
     };
-    paymentsArray.push(paymentArrayObj);
-    console.log(paymentsArray);
+    if(userOnline ==false){
+        alert(`please login first`);
+        displayUser()
+    }
+    else{
+        paymentArrayObj.userPayed = userOnline
+        paymentsArray.push(paymentArrayObj);
+        window.location.href = `confiramtionPage.html?id=${paymentArrayObj.orderId}&totalPrice=${paymentArrayObj.totalPrice}`;
+        
+    }
+    
 };
+
+//-------------------------------USER LOGIN AND REGISTER-------------------------------//
+
+const userLoginFunction = () => {
+    let usernameLogin = document.getElementById(`user`);
+    let passwordLogin = document.getElementById(`password`);
+    let usernameRegister = document.getElementById(`userRegister`);
+    let PasswordRegister = document.getElementById(`passRegister`);
+    let RepeatPasswordRegister = document.getElementById(`pass2Register`);
+    let emailAddressRegister = document.getElementById(`emailRegister`);
+    let signInBtn = document.getElementById(`signin`);
+    let signUpBtn = document.getElementById(`signup`);
+    let signupAlertBox = document.getElementById(`signupAlertBox`);
+    let alreadyMember = document.getElementById(`alreadyMember`);
+    
+    
+    signUpBtn.addEventListener("click", () => {
+        //---------SignUp----------//
+        console.log(usernameLogin.value);
+        if (usernameRegister.value == "" || PasswordRegister.value == "" || RepeatPasswordRegister.value == "" || emailAddressRegister.value == "") {
+            signupAlertBox.innerHTML = "please fill all required fields";
+            return;
+        } else  {
+            signupAlertBox.innerHTML = "";
+            let createUser = 0;
+            if (usersArray.length >= 0) {
+                for (let i = 0; i < usersArray.length; i++) {
+                    if (usernameRegister.value == usersArray[i].username) {
+                        signupAlertBox.innerHTML = "username already exists";
+                        return createUser++;
+                    }
+                }
+                if (PasswordRegister.value != RepeatPasswordRegister.value) {
+                    signupAlertBox.innerHTML = "password are not match";
+                    createUser++;
+                }
+                for (let i = 0; i < usersArray.length; i++) {
+                    if (emailAddressRegister.value != usersArray[i].email) {
+                        signupAlertBox.innerHTML = "email already exists";
+                        return createUser++;
+                    }
+                }
+            }
+            if (createUser == 0) {
+                signupAlertBox.innerHTML = "";
+                let NewUser = {
+                    username: usernameRegister.value,
+                    password: PasswordRegister.value,
+                    email: emailAddressRegister.value,
+                };
+                usersArray.push(NewUser);
+                console.log(usersArray);
+                console.log("user Registered");
+                signupAlertBox.innerHTML = "registration succeeded";
+                alreadyMember.click();
+            }
+        }
+    });
+    signInBtn.addEventListener("click", () => {
+        //---------SignIn----------//
+        if (usersArray.length == 0) {
+            console.log(usersArray.length);
+            alert("Please SignUp First");
+        } else {
+            for (let i = 0; i < usersArray.length; i++) {
+                if(usernameLogin.value =="" || passwordLogin.value==""){
+                    alert("please fill all required fields");
+                    return;
+                }
+                else if (usernameLogin.value != usersArray[i].username) {
+                    alert("username doesn't exists");
+                    return;
+                } else if (passwordLogin.value != usersArray[i].password) {
+                    alert("Wrong Password, try again");
+                    return;
+                } else {
+                    console.log("login");
+                    userLogin = true;
+                    userOnline = usernameLogin.value;
+                    signupAlertBox.innerHTML = "";
+                    togglePopup();
+                }
+            }
+        }
+    });
+};
+userLoginFunction();
+
+
+const stopRegister = () =>{
+    addEventListener('click',() =>{
+        if(event.target.classList == "popup"){
+            togglePopup()
+        }
+        else return
+    })
+}
+stopRegister();
