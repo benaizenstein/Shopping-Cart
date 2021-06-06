@@ -10,6 +10,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 100,
+        type: "man",
     },
     {
         name: "Top",
@@ -20,6 +21,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 10,
+        type: "man",
     },
     {
         name: "Ball",
@@ -30,6 +32,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 30,
+        type: "man",
     },
     {
         name: "Short",
@@ -40,6 +43,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 15,
+        type: "man",
     },
     {
         name: "Watch",
@@ -50,6 +54,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 350,
+        type: "man",
     },
     {
         name: "Bag",
@@ -60,12 +65,80 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 700,
+        type: "man",
+    },
+    {
+        name: "G-Top",
+        color: "dif",
+        size: "dif",
+        qty: 0,
+        img: "https://cdn.shopify.com/s/files/1/0360/6469/0221/products/crylike4_grande.png?v=1604599876",
+        fav: false,
+        cart: false,
+        price: 100,
+        type: "woman",
+    },
+    {
+        name: "Gloves",
+        color: "dif",
+        size: "dif",
+        qty: 0,
+        img: "https://pierce-images.imgix.net/images/6/5/d/6/65d6289862d1aaad15f8b037059798e69869f8dd_2_PIA_18256__wrz_04_2018_01.png",
+        fav: false,
+        cart: false,
+        price: 10,
+        type: "woman",
+    },
+    {
+        name: "Skipping Rope",
+        color: "dif",
+        size: "dif",
+        qty: 0,
+        img: "https://admin.niviasports.com/uploadfile/product/1515YL-1.png",
+        fav: false,
+        cart: false,
+        price: 30,
+        type: "woman",
+    },
+    {
+        name: "Tights",
+        color: "dif",
+        size: "dif",
+        qty: 0,
+        img: "https://fitanu.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/t/m/tmp185054.jpg",
+        fav: false,
+        cart: false,
+        price: 15,
+        type: "woman",
+    },
+    {
+        name: "Hand Weights",
+        color: "dif",
+        size: "dif",
+        qty: 0,
+        img: "https://i.pinimg.com/originals/61/2c/a5/612ca5260241904c74556392d0a3b80f.png",
+        fav: false,
+        cart: false,
+        price: 350,
+        type: "woman",
+    },
+    {
+        name: "Water Bottle",
+        color: "dif",
+        size: "dif",
+        qty: 0,
+        img: "https://cdn.shopify.com/s/files/1/1892/2457/products/51014-Actives-Spout-40-NitroPurple-angle_large.png?v=1616126869",
+        fav: false,
+        cart: false,
+        price: 700,
+        type: "woman",
     },
 ];
 
 let paymentsArray = [];
 let displayArea = document.querySelector(".container");
 let displaySize = document.querySelector(".display");
+let leftNavBar = document.querySelector(".left-navbar");
 let payment = document.querySelector(".payment");
 let paymentLines = document.querySelector(".payment_lines");
 let curPage = "all";
@@ -74,7 +147,7 @@ let firstRunCart = true;
 let totalPriceForCheck = 0;
 const cleanDisplayArea = () => (displayArea.innerHTML = " ");
 const setIdForAllProducts = () => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 12; i++) {
         productsArray[i].id = productsArray[i].name + i;
     }
 };
@@ -138,8 +211,23 @@ const display = (userChoosepage, inputValue) => {
         payment.style.visibility = "hidden";
         displaySize.style.width = "80vw";
         displaySize.style.right = "0";
+        leftNavBar.style.height = "200%";
 
         displayAll();
+    } else if (curPage == "man") {
+        payment.style.visibility = "hidden";
+        displaySize.style.width = "80vw";
+        displaySize.style.right = "0";
+        leftNavBar.style.height = "120vh";
+
+        displayMan();
+    } else if (curPage == "woman") {
+        payment.style.visibility = "hidden";
+        displaySize.style.width = "80vw";
+        displaySize.style.right = "0";
+        leftNavBar.style.height = "120vh";
+
+        displayWoman();
     } else if (curPage == "fav") {
         payment.style.visibility = "hidden";
         displaySize.style.width = "80vw";
@@ -148,14 +236,11 @@ const display = (userChoosepage, inputValue) => {
     } else if (curPage == "cart") {
         displayCart();
     } else if (curPage == "search") {
-      if(inputValue !=undefined)
-        displaySearch(inputValue);
+        if (inputValue != undefined) displaySearch(inputValue);
     }
 };
 
 //-----------------------------------Color & Size Validation---------------------------------//
-
-
 
 const toggleInput = (idx, label) => {
     let inputs = document.querySelectorAll(`input.Color${idx}`);
@@ -271,7 +356,6 @@ const handleClassChanges = (i) => {
 };
 //-----------------------------------Display functions---------------------------------//
 
-
 //-----------------------------------Display ALL---------------------------------//
 
 const displayAll = () => {
@@ -282,6 +366,36 @@ const displayAll = () => {
             displayArea.innerHTML += cardDisplayStr(i);
         }
         handleClassChanges(i);
+    }
+};
+//-----------------------------------Display Man---------------------------------//
+
+const displayMan = () => {
+    for (let i = 0; i < productsArray.length; i++) {
+        if (productsArray[i].type == "man") {
+            console.log(productsArray[i].type)
+            if (productsArray[i].cart) {
+                displayArea.innerHTML += cardPriceDisplayStr(i);
+            } else {
+                displayArea.innerHTML += cardDisplayStr(i);
+            }
+            handleClassChanges(i);
+        }
+    }
+};
+
+//-----------------------------------Display Woman---------------------------------//
+
+const displayWoman = () => {
+    for (let i = 0; i < productsArray.length; i++) {
+        if (productsArray[i].type == "woman") {
+            if (productsArray[i].cart) {
+                displayArea.innerHTML += cardPriceDisplayStr(i);
+            } else {
+                displayArea.innerHTML += cardDisplayStr(i);
+            }
+            handleClassChanges(i);
+        }
     }
 };
 
@@ -339,7 +453,7 @@ const addOrRemoveFromCart = (i, prod, changeClassHere) => {
 //-------------------------------ADD TO CART + VALIDATION-------------------------------//
 
 const addToCart = (i, prod) => {
-  console.log(prod)
+    console.log(prod);
     let sizeS = document.getElementById(`S${i}`);
     let sizeM = document.getElementById(`M${i}`);
     let sizeL = document.getElementById(`L${i}`);
@@ -350,41 +464,39 @@ const addToCart = (i, prod) => {
     let alertBox = document.getElementById(`alertBox${i}`);
     alertBox.innerHTML = " ";
     const checkBoxSizeVal = () => {
-      if (sizeS.checked && !sizeM.checked && !sizeL.checked) {
-        return sizeS.value;
-      } else if (sizeM.checked && !sizeS.checked && !sizeL.checked) {
-        return sizeM.value;
-      } else if (sizeL.checked && !sizeS.checked && !sizeM.checked) {
-        return sizeL.value;
-      } else if (!sizeL.checked && !sizeS.checked && !sizeM.checked) {
-        alertBox.innerHTML = " ";
-        alertBox.innerHTML += "Choose Size";
-        return false;
-      } 
-       
-      
+        if (sizeS.checked && !sizeM.checked && !sizeL.checked) {
+            return sizeS.value;
+        } else if (sizeM.checked && !sizeS.checked && !sizeL.checked) {
+            return sizeM.value;
+        } else if (sizeL.checked && !sizeS.checked && !sizeM.checked) {
+            return sizeL.value;
+        } else if (!sizeL.checked && !sizeS.checked && !sizeM.checked) {
+            alertBox.innerHTML = " ";
+            alertBox.innerHTML += "Choose Size";
+            return false;
+        }
     };
     const checkBoxColorVal = () => {
-      if (colorRed.checked && !colorBlue.checked && !colorBlack.checked) {
-        return colorRed.value;
-      } else if (colorBlue.checked && !colorRed.checked && !colorBlack.checked) {
-        return colorBlue.value;
-      } else if (colorBlack.checked && !colorRed.checked && !colorBlue.checked) {
-        return colorBlack.value;
-      } else if (!colorBlack.checked && !colorRed.checked && !colorBlue.checked) {
-        alertBox.innerHTML = " ";
-        alertBox.innerHTML += "Choose Color";
-        return false;
-      } 
+        if (colorRed.checked && !colorBlue.checked && !colorBlack.checked) {
+            return colorRed.value;
+        } else if (colorBlue.checked && !colorRed.checked && !colorBlack.checked) {
+            return colorBlue.value;
+        } else if (colorBlack.checked && !colorRed.checked && !colorBlue.checked) {
+            return colorBlack.value;
+        } else if (!colorBlack.checked && !colorRed.checked && !colorBlue.checked) {
+            alertBox.innerHTML = " ";
+            alertBox.innerHTML += "Choose Color";
+            return false;
+        }
     };
     const qtyVal = () => {
-      if (qty.value > 0 && qty.value < 6) {
-        return qty.value;
-      } else {
-        alertBox.innerHTML = " ";
-        alertBox.innerHTML += "Choose 1-5 products";
-        return false;
-      }
+        if (qty.value > 0 && qty.value < 6) {
+            return qty.value;
+        } else {
+            alertBox.innerHTML = " ";
+            alertBox.innerHTML += "Choose 1-5 products";
+            return false;
+        }
     };
     if (checkBoxSizeVal() != false && checkBoxColorVal() != false && qtyVal() != false) {
         alertBox.innerHTML = " ";
@@ -446,10 +558,10 @@ const removeFromFav = (prod) => {
 
 //-------------------------------Search-------------------------------//
 const displaySearch = (value) => {
-  
     if (value != "") {
         for (let i = 0; i < productsArray.length; i++) {
             if (productsArray[i].name.substring(0, value.length).toLowerCase() == value.toLowerCase()) {
+                curPage = "cart";
                 if (productsArray[i].cart) {
                     displayArea.innerHTML += cardPriceDisplayStr(i);
                 } else {
@@ -459,11 +571,7 @@ const displaySearch = (value) => {
             }
         }
     }
-
 };
-
-
-
 
 //-------------------------------Confirm Order-------------------------------//
 const confirmOrder = () => {

@@ -1,89 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    <title>My Project</title>
-  </head>
-  <body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+        <title>My Project</title>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-topnavbar">
+                <div class="topnavbar_left">
+                    <a class="item logo">B.A Online Store</a>
+                </div>
+                <div class="topnavbar_search">
+                    <div class="search">
+                        <input type="text" class="input" placeholder="Search.." />
+                        <button class="btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="topnavbar_right">
+                    <a
+                        class="item bi bi-person-circle"
+                        style="font-size: 2rem; color: rgb(119, 210, 238); cursor: pointer"
+                    ></a>
+                    <a
+                        class="item bi bi-heart"
+                        style="font-size: 2rem; color: rgb(216, 238, 119); cursor: pointer"
+                        onclick="display('fav')"
+                    ></a>
+                    <a
+                        class="item bi bi-cart4"
+                        style="font-size: 2rem; color: rgb(228, 56, 170); cursor: pointer"
+                        onclick="display('cart')"
+                    ></a>
+                </div>
+            </div>
+            <div class="header-adv">
+                <p class="ml12">john bryce john bryce john bryce john bryce john bryce john bryce</p>
+            </div>
+        </div>
+        <div class="displayAreaWrapper">
+            <div class="left-navbar">
+                <div class="left-navbar_title">
+                    <h1>Menu</h1>
+                </div>
+                <div class="left-navbar_menu">
+                    <a class="left-navbar-item" onclick="display('all')"><span> View All</span> </a>
+                    <a class="left-navbar-item" onclick="display('man')"><span> Man</span> </a>
+                    <a class="left-navbar-item" onclick="display('woman')"><span> Woman</span> </a>
+                </div>
+            </div>
+            <div class="payment">
+                <div class="payment-wrapper">
+                    <div class="payment-title">
+                        <h1>Total</h1>
+                    </div>
+                    <div class="payment_lines"></div>
+                </div>
+            </div>
 
+            <div class="display">
+                <div class="container"></div>
+            </div>
+        </div>
 
-    <div class="header">
-      <div class="header-topnavbar">
-        <div class="topnavbar_left">
-          <a class="item logo">B.A Online Store</a>
-        </div>
-        <div class="topnavbar_search">
-          <div class="search">
-            <input type="text" class="input" placeholder="Search.." />
-            <button class="btn">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-        <div class="topnavbar_right">
-          <a
-            class="item bi bi-person-circle"
-            style="font-size: 2rem; color: rgb(119, 210, 238); cursor: pointer"
-          ></a>
-          <a
-            class="item bi bi-heart"
-            style="font-size: 2rem; color: rgb(216, 238, 119); cursor: pointer"
-            onclick="display('fav')"
-          ></a>
-          <a
-            class="item bi bi-cart4"
-            style="font-size: 2rem; color: rgb(228, 56, 170); cursor: pointer"
-            onclick="display('cart')"
-          ></a>
-        </div>
-      </div>
-      <div class="header-adv">
-        <p class="ml12">
-          john bryce john bryce john bryce john bryce john bryce john bryce john
-          bryce john bryce john bryce
-        </p>
-      </div>
-    </div>
-    <div class="displayAreaWrapper">
-      <div class="left-navbar">
-        <div class="left-navbar_title">
-          <h1>Menu</h1>
-        </div>
-        <div class="left-navbar_menu">
-          <a class="left-navbar-item" onclick="display('all')"
-            ><span> View All</span>
-          </a>
-          <a class="left-navbar-item"><span>soon...</span></a>
-          <a class="left-navbar-item"><span>soon...</span></a>
-        </div>
-      </div>
-      <div class="payment">
-        <div class="payment-wrapper">
-          <div class="payment-title">
-            <h1>Total</h1>
-          </div>
-          <div class="payment_lines">
-            
-          </div>
-        </div>
-      </div>
-
-      <div class="display">
-        <div class="container"></div>
-      </div>
-    </div>
-
-    <script src="script.js"></script>
-  </body>
+        <script src="script.js"></script>
+    </body>
 </html>
