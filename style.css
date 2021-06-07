@@ -104,6 +104,18 @@ input:focus {
     display: inline-block;
     line-height: 2em;
 }
+/* -----------------------------------------HeaderBtns(userpage)--------------------------------------------------------- */
+.header .header-btns {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 6vh;
+    background-color: rgb(236, 236, 236);
+    top: 14vh;
+}
+
+
 /* -----------------------------------------displayAreaWrapper---------------------------------------------------------- */
 
 .displayAreaWrapper {
@@ -240,6 +252,17 @@ input:focus {
     width: 80vw;
     height: 86vh;
 }
+/* -----------------------------------------display---------------------------------------------------------- */
+.userOrders {
+    position: absolute;
+    display: flex;
+    flex-direction: row wrap;
+    right: 0%;
+    width: 100vw;
+    height: 80vh;
+    top: 20vh;
+}
+
 /* -----------------------------------------icon---------------------------------------------------------- */
 .icon {
     cursor: pointer;
@@ -263,7 +286,7 @@ input:focus {
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-.container {
+.container, .userOrders-container {
     position: relative;
     display: flex;
     width: 100%;
@@ -272,18 +295,17 @@ input:focus {
     margin: auto;
 }
 
-.container .card {
+.container .card, .userOrders-container .card {
     margin: 3%;
     position: relative;
     width: 320px;
     height: 450px;
     background: rgb(248, 248, 248);
-
     border-radius: 20px;
     overflow: hidden;
 }
 
-.container .card:before {
+.container .card:before,  .userOrders-container .card:before{
     content: "";
     position: absolute;
     top: 0;
@@ -295,10 +317,8 @@ input:focus {
     transition: 0.5s ease-in-out;
 }
 
-.container .card:after {
+.container .card:after,  .userOrders-container .card:after{
     content: "B.A B.A B.A B.A B.A B.A B.A B.A B.A B.A B.A B.A";
-    /* content: 'bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla'; */
-    transform: rotate(45deg);
     position: absolute;
     top: -5%;
     left: -50%;
@@ -333,6 +353,15 @@ input:focus {
 
 .container .card .contentBx {
     position: absolute;
+    bottom: 40px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    transition: 1s;
+    z-index: 2;
+}
+.userOrders-container .card .contentBx3 {
+    position: absolute;
     bottom: 0;
     width: 100%;
     height: 100px;
@@ -340,18 +369,35 @@ input:focus {
     transition: 1s;
     z-index: 2;
 }
+.userOrders-container .card .contentBx2 {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    transition: 1s;
+    z-index: 2;
+    margin-bottom: 2%;
+}
+
 
 .container .card:hover .contentBx {
     height: 210px;
 }
 
-.container .card .contentBx h2 {
-    position: relative;
+.userOrders-container .card .contentBx h2 {
     font-weight: 600;
     letter-spacing: 1px;
     color: rgb(0, 0, 0);
-    margin: 0;
+    margin: 2px;
 }
+.userOrders-container .card .contentBx2 p {
+    
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgb(0, 0, 0);
+    
+}
+
 
 .container .card .contentBx .size,
 .container .card .contentBx .color,
@@ -592,4 +638,32 @@ input:checked + label {
 .tnx-container_icon {
     font-size: 20rem;
     color: rgb(0, 243, 0);
+}
+
+/* -----------------------------------------userPageBtns---------------------------------------------------------- */
+.userPageBtns {
+
+	background:linear-gradient(to bottom, #ad10938a 5%, rgb(228, 56, 170) 100%);
+	background-color:rgb(228, 56, 170);
+	border-radius:24px;
+	border:1px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:15px 30px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #ff79c3;
+    margin: 5px;
+}
+.userPageBtns:hover span {
+    color: rgb(0, 0, 0);
+    transform: translate(-50%, -50%);
+    transition: 0.2s ease-in-out;
+
+}
+.userPageBtns:active {
+	position:relative;
+	top:1px;
 }
