@@ -10,7 +10,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 100,
-        type: "man",
+        type: "men",
     },
     {
         name: "Top",
@@ -21,7 +21,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 10,
-        type: "man",
+        type: "men",
     },
     {
         name: "Ball",
@@ -32,7 +32,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 30,
-        type: "man",
+        type: "men",
     },
     {
         name: "Short",
@@ -43,7 +43,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 15,
-        type: "man",
+        type: "men",
     },
     {
         name: "Watch",
@@ -54,7 +54,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 350,
-        type: "man",
+        type: "men",
     },
     {
         name: "Bag",
@@ -65,7 +65,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 700,
-        type: "man",
+        type: "men",
     },
     {
         name: "G-Top",
@@ -76,7 +76,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 100,
-        type: "woman",
+        type: "women",
     },
     {
         name: "Gloves",
@@ -87,7 +87,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 10,
-        type: "woman",
+        type: "women",
     },
     {
         name: "Skipping Rope",
@@ -98,7 +98,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 30,
-        type: "woman",
+        type: "women",
     },
     {
         name: "Tights",
@@ -109,7 +109,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 15,
-        type: "woman",
+        type: "women",
     },
     {
         name: "Hand Weights",
@@ -120,7 +120,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 350,
-        type: "woman",
+        type: "women",
     },
     {
         name: "Water Bottle",
@@ -131,7 +131,7 @@ let productsArray = [
         fav: false,
         cart: false,
         price: 700,
-        type: "woman",
+        type: "women",
     },
 ];
 let params = new URLSearchParams(document.location.search.substring(1));
@@ -153,14 +153,16 @@ let firstRunCart = true;
 let totalPriceForCheck = 0;
 let toggleswitcher = 0;
 const cleanDisplayArea = () => (displayArea.innerHTML = " ");
-const setIdForAllProducts = () => {
+const setUpProdArry = (arr) => {
     for (let i = 0; i < 12; i++) {
-        productsArray[i].id = productsArray[i].name + i;
+        arr[i].id = arr[i].name + i;
+        arr[i].cart = false
+        arr[i].fav = false
     }
 };
-let setUpProdArry = productsArray;
 
-setIdForAllProducts();
+
+setUpProdArry(productsArray);
 
 //-----------------------------------------Get From Local Storage-------------------------------------------------------//
 const getFromLoacl = () => {
@@ -171,6 +173,7 @@ const getFromLoacl = () => {
 
     if (prudArr != null) {
         productsArray = JSON.parse(prudArr);
+        console.log(productsArray)
         for (let i = 0; i < productsArray.length; i++) {
             if (productsArray[i].fav == true) {
                 firstRunFav = false;
@@ -253,20 +256,20 @@ const display = (userChoosepage, inputValue) => {
         leftNavBar.style.height = "200%";
 
         displayAll();
-    } else if (curPage == "man") {
+    } else if (curPage == "men") {
         payment.style.visibility = "hidden";
         displaySize.style.width = "80vw";
         displaySize.style.right = "0";
         leftNavBar.style.height = "120vh";
 
-        displayMan();
-    } else if (curPage == "woman") {
+        displayMen();
+    } else if (curPage == "women") {
         payment.style.visibility = "hidden";
         displaySize.style.width = "80vw";
         displaySize.style.right = "0";
         leftNavBar.style.height = "120vh";
 
-        displayWoman();
+        displayWomen();
     } else if (curPage == "fav") {
         payment.style.visibility = "hidden";
         displaySize.style.width = "80vw";
@@ -343,7 +346,7 @@ const cardDisplayStr = (i) => {
         <div class="size QTY">
           <input type="number" id="qty${i}" placeholder="QTY" min="1" max="5">
         </div>
-        <div id="alertBox${i}" class="alertBox"></div>
+        <div id="alertBox${i}" class="alertBox" ></div>
         <div class="icon-buttons">
           <a class="bi bi-heart icon fa-2x" id="fav${i}" onclick="addOrRemoveFromFav(productsArray[${i}],this)"></a>
           <a class="bi bi-cart icon fa-2x" id="cart${i}" onclick="addOrRemoveFromCart(${i},productsArray[${i}],this)"></a>
@@ -412,11 +415,15 @@ const displayAll = () => {
         handleClassChanges(i);
     }
 };
-//-----------------------------------Display Man---------------------------------//
+display('all') // onload
+//-----------------------------------Display Men---------------------------------//
 
-const displayMan = () => {
-    for (let i = 0; i < productsArray.length; i++) {
-        if (productsArray[i].type == "man") {
+const displayMen = () => {
+    
+    for (let i = (productsArray.length -1); i > -1 ;i--) {
+        console.log(i)
+        console.log(productsArray)
+        if (productsArray[i].type == "men") {
             if (productsArray[i].cart) {
                 displayArea.innerHTML += cardPriceDisplayStr(i);
             } else {
@@ -427,11 +434,11 @@ const displayMan = () => {
     }
 };
 
-//-----------------------------------Display Woman---------------------------------//
+//-----------------------------------Display Women---------------------------------//
 
-const displayWoman = () => {
+const displayWomen = () => {
     for (let i = 0; i < productsArray.length; i++) {
-        if (productsArray[i].type == "woman") {
+        if (productsArray[i].type == "women") {
             if (productsArray[i].cart) {
                 displayArea.innerHTML += cardPriceDisplayStr(i);
             } else {
@@ -469,6 +476,7 @@ const displayUser = () => {
         window.location.href = `userPage.html?username=${userOnline}`;
     } else {
         togglePopup();
+       
     }
 };
 //-----------------------------------Display FAV---------------------------------//
@@ -493,7 +501,9 @@ const displayFav = () => {
 //-----------------------------------Display CART---------------------------------//
 const displayCart = () => {
     paymentLines.innerHTML = ` `;
+    
     let checkIfEmpty = true;
+    console.log(productsArray)
     for (let i = 0; i < productsArray.length; i++) {
         if (productsArray[i].cart) {
             checkIfEmpty = false;
@@ -518,6 +528,7 @@ const displayCart = () => {
 
 //----------------------------------- CART---------------------------------//
 const addOrRemoveFromCart = (i, prod, changeClassHere) => {
+    
     firstRunCart = false;
     prod.cart ? removeFromCart(prod, changeClassHere) : addToCart(i, prod, changeClassHere);
 };
@@ -578,7 +589,6 @@ const addToCart = (i, prod) => {
                 productsArray[i].qty = qtyVal();
                 productsArray[i].cart = true;
                 localStorage.setItem("prudArr", JSON.stringify(productsArray));
-
                 return display(curPage);
             }
         }
@@ -648,6 +658,7 @@ const displaySearch = (value) => {
 
 //-------------------------------Confirm Order-------------------------------//
 const confirmOrder = () => {
+    
     let rndNum = Math.trunc(Math.random() * 1000 + 1);
 
     if (paymentsArray.length > 0) {
@@ -690,7 +701,7 @@ const confirmOrder = () => {
     } else {
         paymentArrayObj.userPayed = userOnline;
         paymentsArray.push(paymentArrayObj);
-        productsArray = setUpProdArry;
+        setUpProdArry(productsArray);
         localStorage.setItem("payArr", JSON.stringify(paymentsArray));
         localStorage.setItem("prudArr", JSON.stringify(productsArray));
         window.location.href = `confiramtionPage.html?un=${paymentArrayObj.userPayed}&id=${paymentArrayObj.orderId}&totalPrice=${paymentArrayObj.totalPrice}`;
@@ -721,23 +732,23 @@ const userLoginFunction = () => {
             RepeatPasswordRegister.value == "" ||
             emailAddressRegister.value == ""
         ) {
-            signupAlertBox.innerHTML = "please fill all required fields";
+            signupAlertBox.innerHTML = "Please fill all required fields";
             createUser = false;
         }
         if (usersArray.length > 0) {
             for (let i = 0; i < usersArray.length; i++) {
                 if (usernameRegister.value == usersArray[i].username) {
-                    signupAlertBox.innerHTML = "username already exists";
+                    signupAlertBox.innerHTML = "Username already exists";
                     createUser = false;
                 }
                 if (emailAddressRegister.value == usersArray[i].email) {
-                    signupAlertBox.innerHTML = "email already exists";
+                    signupAlertBox.innerHTML = "Email already exists";
                     createUser = false;
                 }
             }
         }
         if (PasswordRegister.value != RepeatPasswordRegister.value) {
-            signupAlertBox.innerHTML = "password are not match";
+            signupAlertBox.innerHTML = "Passwords don't match";
             createUser = false;
         }
 
@@ -750,7 +761,7 @@ const userLoginFunction = () => {
             };
             usersArray.push(NewUser);
             localStorage.setItem("userArr", JSON.stringify(usersArray));
-            signupAlertBox.innerHTML = "registration succeeded";
+            signupAlertBox.innerHTML = "Registration succeeded";
             alreadyMember.click();
         }
     });
@@ -766,7 +777,7 @@ const userLoginFunction = () => {
                 return;
             }
             if (usernameLogin.value == "" || passwordLogin.value == "") {
-                alert("please fill all required fields");
+                alert("Please fill all required fields");
                 createUser = false;
                 return;
             }
@@ -777,7 +788,7 @@ const userLoginFunction = () => {
                 }
             }
             if (checkloops == false) {
-                alert("username doesn't exists");
+                alert("Username doesn’t exist");
                 return;
             }
             checkloops = false;
@@ -796,6 +807,8 @@ const userLoginFunction = () => {
             localStorage.setItem("user", JSON.stringify(userOnline));
             signupAlertBox.innerHTML = "";
             togglePopup();
+            display('all');
+            alert(`Hello ${userOnline}`);
         }
     });
 };
