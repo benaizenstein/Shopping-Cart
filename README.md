@@ -1,12 +1,12 @@
-<h1>js vanilla project - shopping cart:</h1>
+<h3>js vanilla project - shopping cart:</h3>
 </br>
-add to cart,
+add to cart
 </br>
-add to fav,
+add to fav
 </br>
-login and register,
+login and register
 </br>
-user interface,
+user interface
 </br>
 validation 
 </br>
