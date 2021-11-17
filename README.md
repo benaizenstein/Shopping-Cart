@@ -14,6 +14,5 @@ arrays and objects
 </br>
 css - possitaion,flexbox, animation
 </br>
-https://benaizenstein.github.io/cart/
 </br>
 https://firstproject-d93b5.web.app/
